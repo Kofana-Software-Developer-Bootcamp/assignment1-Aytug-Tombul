@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Customer Service Example</title>
+    <meta charset="utf-8" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script>
+      function createTableRows(rows = []) {
+        for (let i = 0; i < allRegistered.length; i++) {
+          let row = ` <tr>
+      <td scope="row">${allRegistered[i].ad}</td>
+      <td>${allRegistered[i].soyad}</td>
+      <td>${allRegistered[i].email}</td>
+      <td>${allRegistered[i].tel}</td>
+    </tr>`;
+          $("tbody").append(row);
+        }
+      }
+      var allRegistered = [];
+      window.onload = function () {
+        allRegistered =
+          localStorage.getItem("registered") == null
+            ? []
+            : JSON.parse(localStorage.getItem("registered"));
+        console.log(allRegistered);
+        createTableRows(allRegistered)
+      };
+      function getFormValues() {
+        let bilgiler = {
+          ad: $("#ad").val(),
+          soyad: $("#soyad").val(),
+          email: $("#email").val(),
+          tel: $("#tel").val(),
+        };
+
+        window.alert(
+          "Adiniz : " +
+            bilgiler.ad +
+            "\r\n" +
+            "Soyadiniz : " +
+            bilgiler.soyad +
+            "\r\n" +
+            "Mail Adresiniz : " +
+            bilgiler.email +
+            "\r\n" +
+            "Telefonunuz : " +
+            bilgiler.tel +
+            "\r\n"
+        );
+        allRegistered.push(bilgiler);
+        console.log(allRegistered);
+        let row = ` <tr>
+      <td scope="row">${bilgiler.ad}</td>
+      <td>${bilgiler.soyad}</td>
+      <td>${bilgiler.email}</td>
+      <td>${bilgiler.tel}</td>
+    </tr>`;
+          $("tbody").append(row);
+        localStorage.setItem("registered", JSON.stringify(allRegistered));
+      }
+    </script>
+  </head>
+
+  <body>
+    <div class="jumbotron">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <img src="sdir3Sab_400x400.jpg" style="width: 200px" />
+          </div>
+          <div class="col-md-8">
+            <h1>Patika Başvuru formu</h1>
+            <h2>Hoşgeldiniz Lütfen aşağıdaki alanları doldurunuz.</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row" style="margin-bottom: 10px">
+        <div class="col-3"></div>
+        <div class="col-6">
+          <form>
+            <div class="form-group">
+              <label for="ad">Adınız</label>
+              <input type="text" class="form-control" id="ad" />
+            </div>
+            <div class="form-group">
+              <label for="soyad">Soyadınız</label>
+              <input type="text" class="form-control" id="soyad" />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="text" class="form-control" id="email" />
+            </div>
+            <div class="form-group">
+              <label for="tel">Telefon Numarasi</label>
+              <input type="text" class="form-control" id="tel" />
+            </div>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="getFormValues()"
+            >
+              Kayit
+            </button>
+          </form>
+        </div>
+        <div class="col-3"></div>
+      </div>
+    </div>
+    <div class="workArea">
+      <section>
+        <div class="col-12">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Ad</th>
+                <th scope="col">Soyad</th>
+                <th scope="col">Email</th>
+                <th scope="col">Telefon</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+    <br />
+    <footer class="page-footer font-small pt-4">
+      <div class="container-fluid text-center text-md-left">
+        <div class="col-md-6 mt-md-0 mt-3">
+          Github
+          <a href="https://github.com/Aytug-Tombul"> Aytug Tombul</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
